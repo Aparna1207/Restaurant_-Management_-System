@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Page Heading -->
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+            🍽 Our Delicious Menu
+        </h1>
+
+        <p class="text-muted">
+            Choose your favorite food and order instantly.
+        </p>
+
+    </div>
+
+    <!-- Search Box -->
+
+    <div class="row justify-content-center mb-5">
+
+        <div class="col-md-6">
+
+            <input type="text"
+                   id="searchFood"
+                   class="form-control form-control-lg"
+                   placeholder="Search Food..."
+                   onkeyup="searchFood()">
+
+        </div>
+
+    </div>
+
+    <!-- Food Cards -->
+
+    <div class="row g-4" id="foodContainer">
+
+        {% for food in foods %}
+
+        <div class="col-md-4 food-item">
+
+            <div class="card shadow-lg border-0 food-card h-100">
+
+                <img src="{{ url_for('static',
+                filename='images/' + food.image) }}"
+                class="card-img-top food-img"
+                alt="{{ food.food_name }}">
+
+                <div class="card-body text-center">
+
+                    <h3 class="fw-bold">
+                        {{ food.food_name }}
+                    </h3>
+
+                    <p class="text-muted">
+                        {{ food.category }}
+                    </p>
+
+                    <h4 class="text-success">
+                        ₹ {{ food.price }}
+                    </h4>
+
+                    <a href="/order/{{ food.id }}"
+                       class="btn btn-warning mt-3">
+
+                        Order Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<script>
+
+function searchFood(){
+
+    let input =
+        document.getElementById(
+            "searchFood"
+        ).value.toUpperCase();
+
+    let foods =
+        document.getElementsByClassName(
+            "food-item"
+        );
+
+    for(let i=0;i<foods.length;i++){
+
+        let title =
+            foods[i]
+            .getElementsByTagName("h3")[0];
+
+        if(
+            title.innerHTML
+            .toUpperCase()
+            .indexOf(input) > -1
+        ){
+            foods[i].style.display = "";
+        }
+        else{
+            foods[i].style.display = "none";
+        }
+    }
+}
+
+</script>
+
+{% endblock %}

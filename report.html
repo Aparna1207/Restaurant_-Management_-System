@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- PAGE TITLE -->
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+            📊 Sales Report
+        </h1>
+
+        <p class="text-muted">
+            Restaurant Sales Analytics & Revenue Summary
+        </p>
+
+    </div>
+
+    <!-- SALES TABLE -->
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-success text-white">
+
+            <h4 class="mb-0">
+                🍽 Food Sales Report
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover text-center">
+
+                    <thead class="table-dark">
+
+                        <tr>
+                            <th>Food Name</th>
+                            <th>Quantity Sold</th>
+                            <th>Total Sales (₹)</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% set total_revenue = namespace(value=0) %}
+
+                        {% for report in reports %}
+
+                        <tr>
+
+                            <td>{{ report.food_name }}</td>
+
+                            <td>{{ report.qty }}</td>
+
+                            <td>₹ {{ report.sales }}</td>
+
+                        </tr>
+
+                        {% set total_revenue.value =
+                        total_revenue.value + report.sales %}
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SUMMARY CARDS -->
+
+    <div class="row mt-5">
+
+        <!-- TOTAL REVENUE -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 bg-success text-white report-card">
+
+                <div class="card-body text-center">
+
+                    <h1>💰</h1>
+
+                    <h3>
+                        ₹ {{ total_revenue.value }}
+                    </h3>
+
+                    <h5>Total Revenue</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TOTAL ITEMS -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 bg-primary text-white report-card">
+
+                <div class="card-body text-center">
+
+                    <h1>🍔</h1>
+
+                    <h3>
+                        {{ reports|length }}
+                    </h3>
+
+                    <h5>Food Items Sold</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- STATUS -->
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 bg-warning text-dark report-card">
+
+                <div class="card-body text-center">
+
+                    <h1>📈</h1>
+
+                    <h3>Active</h3>
+
+                    <h5>Business Status</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- REPORT BUTTONS -->
+
+    <div class="text-center mt-5">
+
+        <a href="/admin"
+           class="btn btn-dark btn-lg me-3">
+
+            Back to Dashboard
+
+        </a>
+
+        <button onclick="window.print()"
+                class="btn btn-success btn-lg">
+
+            Print Report
+
+        </button>
+
+    </div>
+
+</div>
+
+{% endblock %}

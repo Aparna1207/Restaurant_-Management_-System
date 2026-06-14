@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row justify-content-center align-items-center"
+         style="min-height:80vh;">
+
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow-lg border-0 register-card">
+
+                <div class="card-body p-5">
+
+                    <div class="text-center mb-4">
+
+                        <h1>👤</h1>
+
+                        <h2 class="fw-bold">
+                            Create Account
+                        </h2>
+
+                        <p class="text-muted">
+                            Register to access Smart Restaurant
+                        </p>
+
+                    </div>
+
+                    <form method="POST">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Full Name
+                            </label>
+
+                            <input type="text"
+                                   name="name"
+                                   class="form-control"
+                                   placeholder="Enter Full Name"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Email Address
+                            </label>
+
+                            <input type="email"
+                                   name="email"
+                                   class="form-control"
+                                   placeholder="Enter Email"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <input type="password"
+                                   id="password"
+                                   name="password"
+                                   class="form-control"
+                                   placeholder="Enter Password"
+                                   required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Confirm Password
+                            </label>
+
+                            <input type="password"
+                                   id="confirm_password"
+                                   class="form-control"
+                                   placeholder="Confirm Password"
+                                   required>
+
+                        </div>
+
+                        <div id="password_error"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-success w-100 fw-bold">
+
+                            Register
+
+                        </button>
+
+                    </form>
+
+                    <hr>
+
+                    <div class="text-center">
+
+                        <p>
+                            Already have an account?
+                        </p>
+
+                        <a href="/login"
+                           class="btn btn-outline-primary">
+
+                            Login Here
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.querySelector("form").addEventListener(
+    "submit",
+    function(e){
+
+        let password =
+            document.getElementById(
+                "password"
+            ).value;
+
+        let confirm =
+            document.getElementById(
+                "confirm_password"
+            ).value;
+
+        if(password !== confirm){
+
+            e.preventDefault();
+
+            document.getElementById(
+                "password_error"
+            ).innerHTML =
+            "Passwords do not match!";
+
+        }
+
+    }
+);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+        Add Food Item
+    </h2>
+
+    <form method="POST">
+
+        <div class="mb-3">
+            <label>Food Name</label>
+            <input type="text"
+                   name="food_name"
+                   class="form-control"
+                   required>
+        </div>
+
+        <div class="mb-3">
+            <label>Category</label>
+            <input type="text"
+                   name="category"
+                   class="form-control"
+                   required>
+        </div>
+
+        <div class="mb-3">
+            <label>Price</label>
+            <input type="number"
+                   name="price"
+                   class="form-control"
+                   required>
+        </div>
+
+        <div class="mb-3">
+            <label>Image Name</label>
+            <input type="text"
+                   name="image"
+                   class="form-control"
+                   placeholder="pizza.jpg"
+                   required>
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+            Add Food
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
